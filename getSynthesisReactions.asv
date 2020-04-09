@@ -1,0 +1,47 @@
+ function [C1 , C2 , C3 , C4 , C5 , C , Count , R , F] = getSynthesisReactions(a,api_call);
+R='Butanal';
+C4='0';
+C5='0';
+[C] = get_equation(a);       %get reaction formula
+[R] = getReactionName(a);    %get reaction name
+disp(Reaction Name: )
+disp(R);
+[F] = getReactionFormula(a); %get Cobra formula
+
+if api_call=='R02946'
+F = flip_Formula(F);
+elseif api_call=='R01976'
+F = flip_Formula(F);
+elseif api_call=='R01175'
+F = flip_Formula(F);
+elseif api_call=='R01172'
+F = flip_Formula(F);
+elseif api_call=='R02544'
+F = flip_Formula(F);
+end
+disp(F);
+%[F] = get_ReactionFormula(a); %get Cobra formula
+[compound_1 , compound_2 , compound_3 , compound_4 , compound_5 , Count] = reaction_compounds(C); %get equation compounds
+[C1]=get_cobra_name(compound_1);
+[C2]=get_cobra_name(compound_2);
+[C3]=get_cobra_name(compound_3);
+%Reaction_metab = [C1 C2 C3];
+
+%disp('Formula = '); %display reaction equation
+%disp(C);
+%disp('Reaction Name = '); %display reaction equation
+%disp(R);
+
+if Count==4
+[C4]=get_cobra_name(compound_4)
+Reaction_metab = [C1 C2 C3 C4];    
+elseif Count==5
+[C4]=get_cobra_name(compound_4);
+[C5]=get_cobra_name(compound_5);
+Reaction_metab = [C1 C2 C3 C4 C5];
+end
+
+%[newmodel2] = addSinkReactions(R,newmodel);
+%disp(newmodel2);
+
+ end
